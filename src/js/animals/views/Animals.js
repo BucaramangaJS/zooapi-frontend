@@ -1,8 +1,7 @@
 var _ = require('underscore');
 var Backbone = require('backbone');
 
-var src = require('../../templates/app/app.html');
-var PrincipalView = require('./Principal');
+var src = require('../templates/main.html');
 
 
 module.exports = Backbone.View.extend({
@@ -13,8 +12,6 @@ module.exports = Backbone.View.extend({
 
   initialize: function () {
 
-    this.principalView = null;
-
     this.render();
   },
 
@@ -22,11 +19,6 @@ module.exports = Backbone.View.extend({
 
     var html = this.template();
     this.$el.html(html);
-
-    var $principalEl = this.$('.principal');
-    this.principalView = new PrincipalView({
-      el: $principalEl
-    });
   }
 
 });

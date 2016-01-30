@@ -13282,33 +13282,111 @@ return jQuery;
 },{}],4:[function(require,module,exports){
 var _ = require('underscore');
 var Backbone = require('backbone');
+var $ = require('jquery');
 
-var configure = require('./configure');
-var settings = require('./settings');
-var data = require('./data');
-var state = require('./state');
-var AppView = require('./views/App');
-var AppRouter = require('./routers/App');
+var state = require('../state');
+var data = require('../data');
+var AnimalsView = require('./views/Animals');
 
 
-//
-// VISTA PRINCIPAL
-//
-var appView = new AppView({
-  el: $('#app')
-});
-state.set('appView', appView);
+module.exports = function () {
 
+  var animalsView = new AnimalsView({
+    el: $('#animals')
+  });
 
-//
-// ROUTER
-//
-var appRouter = new AppRouter();
-Backbone.history.start();
-state.set('appRouter', appRouter);
+  state.set('animalsView', animalsView);
 
-},{"./configure":5,"./data":6,"./routers/App":9,"./settings":10,"./state":11,"./views/App":12,"backbone":1,"underscore":3}],5:[function(require,module,exports){
+};
+
+},{"../data":12,"../state":20,"./views/Animals":6,"backbone":1,"jquery":2,"underscore":3}],5:[function(require,module,exports){
+module.exports = "<h1>Lista de animales</h1>\n\n<p>Lista de animales.</p>\n";
+
+},{}],6:[function(require,module,exports){
 var _ = require('underscore');
+var Backbone = require('backbone');
+
+var src = require('../templates/main.html');
+
+
+module.exports = Backbone.View.extend({
+
+  template: _.template(src),
+
+  events: {},
+
+  initialize: function () {
+
+    this.render();
+  },
+
+  render: function () {
+
+    var html = this.template();
+    this.$el.html(html);
+  }
+
+});
+
+},{"../templates/main.html":5,"backbone":1,"underscore":3}],7:[function(require,module,exports){
+module.exports = function () {
+
+  // TODO:
+};
+
+},{}],8:[function(require,module,exports){
+var _ = require('underscore');
+var Backbone = require('backbone');
+var $ = require('jquery');
+
+var state = require('../state');
+var data = require('../data');
+var AppView = require('./views/App');
+
+
+module.exports = function () {
+
+  var appView = new AppView({
+    el: $('#app')
+  });
+
+  state.set('appView', appView);
+
+};
+
+},{"../data":12,"../state":20,"./views/App":10,"backbone":1,"jquery":2,"underscore":3}],9:[function(require,module,exports){
+module.exports = "<!-- HEADER -->\n<header class=\"app__header row\">\n    <div class=\"column small-12\">\n        <img src=\"/img/logo.jpg\" alt=\"ZooAPI\">\n        <h1>ZooAPI</h1>\n    </div>\n</header>\n\n<!-- CONTENT -->\n<div class=\"app__content row\">\n\n    <!-- SIDEBAR -->\n    <aside class=\"app__sidebar column small-12 medium-4\">\n        <h2>Sidebar</h2>\n        <ul>\n            <li><a href=\"#\">Principal</a></li>\n            <li><a href=\"#animales\">Animales</a></li>\n            <li><a href=\"#animales/crear\">Crear animal</a></li>\n        </ul>\n    </aside>\n\n    <!-- SECTIONS -->\n    <div class=\"app__sections column small-12 medium-8\">\n\n        <!-- PRINCIPAL -->\n        <section id=\"principal\" class=\"app__section principal\"></section>\n\n        <!-- ANIMALES -->\n        <section id=\"animals\" class=\"app__section animals\"></section>\n\n        <!-- ANIMALES - CREAR -->\n        <section id=\"animals-create\" class=\"app__section animals-create\"></section>\n\n    </div>\n</div>\n\n<!-- FOOTER -->\n<footer class=\"app__footer row\">\n    <div class=\"column small-12\">\n        <p>&copy; 2016 Red global de zoológicos.</p>\n    </div>\n</footer>\n";
+
+},{}],10:[function(require,module,exports){
+var _ = require('underscore');
+var Backbone = require('backbone');
+var $ = require('jquery');
+
+var src = require('../templates/main.html');
+
+
+module.exports = Backbone.View.extend({
+
+  template: _.template(src),
+
+  events: {},
+
+  initialize: function () {
+
+    this.render();
+  },
+
+  render: function () {
+
+    var html = this.template();
+    this.$el.html(html);
+  }
+
+});
+
+},{"../templates/main.html":9,"backbone":1,"jquery":2,"underscore":3}],11:[function(require,module,exports){
+var _ = require('underscore');
+var Backbone = require('backbone');
 
 _.templateSettings = {
     evaluate    : /{{([\s\S]+?)}}/g,
@@ -13316,12 +13394,46 @@ _.templateSettings = {
     escape      : /{{-([\s\S]+?)}}/g
 };
 
-},{"underscore":3}],6:[function(require,module,exports){
+window._ = _;
+window.Backbone = Backbone;
+
+},{"backbone":1,"underscore":3}],12:[function(require,module,exports){
 var DataModel = require('./models/Data');
 
 module.exports = new DataModel();
 
-},{"./models/Data":7}],7:[function(require,module,exports){
+},{"./models/Data":14}],13:[function(require,module,exports){
+var _ = require('underscore');
+var Backbone = require('backbone');
+
+var configure = require('./configure');
+var state = require('./state');
+var AppRouter = require('./routers/App');
+var app = require('./app/app');
+
+
+// Iniciar la aplicación principal.
+app();
+
+// Crear router.
+var appRouter = new AppRouter();
+
+// Guardar referencia del router.
+state.set('router', appRouter);
+
+// Iniciar la ruta actual y leer futuros cambios.
+Backbone.history.start();
+
+},{"./app/app":8,"./configure":11,"./routers/App":19,"./state":20,"backbone":1,"underscore":3}],14:[function(require,module,exports){
+var Backbone = require('backbone');
+
+module.exports = Backbone.Model.extend({
+
+  animals: null  //  Colección de animales.
+
+});
+
+},{"backbone":1}],15:[function(require,module,exports){
 var Backbone = require('backbone');
 
 module.exports = Backbone.Model.extend({
@@ -13330,132 +13442,78 @@ module.exports = Backbone.Model.extend({
 
 });
 
-},{"backbone":1}],8:[function(require,module,exports){
-arguments[4][7][0].apply(exports,arguments)
-},{"backbone":1,"dup":7}],9:[function(require,module,exports){
+},{"backbone":1}],16:[function(require,module,exports){
+var _ = require('underscore');
 var Backbone = require('backbone');
+var $ = require('jquery');
+
+var state = require('../state');
+var data = require('../data');
+var PrincipalView = require('./views/Principal');
+
+
+module.exports = function () {
+
+  var principalView = new PrincipalView({
+    el: $('#principal')
+  });
+
+  state.set('principalView', principalView);
+
+};
+
+},{"../data":12,"../state":20,"./views/Principal":18,"backbone":1,"jquery":2,"underscore":3}],17:[function(require,module,exports){
+module.exports = "<h1>Principal</h1>\n<p>Esta es la página principal del proyecto ZooAPI.</p>\n";
+
+},{}],18:[function(require,module,exports){
+arguments[4][6][0].apply(exports,arguments)
+},{"../templates/main.html":17,"backbone":1,"dup":6,"underscore":3}],19:[function(require,module,exports){
+var _ = require('underscore');
+var Backbone = require('backbone');
+var $ = require('jquery');
+
+var principal = require('../principal/principal');
+var animals = require('../animals/animals');
+var animalsCreate = require('../animalsCreate/animalsCreate');
+
 
 var changePage = function (page) {
+
+  // Ocultar todas las vistas activas y mostrar una específica.
   $('.app__section').css('display', 'none');
   $('.' + page).css('display', 'block');
+
+  console.log('Se ha cargado la ruta: "' + page + '".');
 };
 
 module.exports = Backbone.Router.extend({
 
   routes: {
     '': 'principal',
-    'zoologicos': 'zoologicos',
     'animales': 'animales',
-    'animales/crear': 'animales-crear',
-    'transacciones': 'transacciones',
+    'animales/crear': 'animales-crear'
   },
 
   principal: function () {
     changePage('principal');
-  },
-
-  zoologicos: function () {
-    changePage('zoos');
+    principal();
   },
 
   animales: function () {
     changePage('animals');
+    animals();
   },
 
   'animales-crear': function () {
     changePage('animals-create');
-  },
-
-  transacciones: function () {
-    changePage('transactions');
+    animalsCreate();
   }
 
 });
 
-},{"backbone":1}],10:[function(require,module,exports){
-module.exports={
-  "VERSION": "1.0.0",
-  "API": {
-    "PROTOCOL": "HTTP",
-    "SERVER": "zooapi.heroku.com",
-    "PORT": 80,
-    "ENDPOINTS": {
-      "ANIMAL": "animals",
-      "ZOO": "zoo",
-      "TRANSACTION": "transaction",
-    }
-  }
-}
-
-},{}],11:[function(require,module,exports){
+},{"../animals/animals":4,"../animalsCreate/animalsCreate":7,"../principal/principal":16,"backbone":1,"jquery":2,"underscore":3}],20:[function(require,module,exports){
 var StateModel = require('./models/State');
 
 module.exports = new StateModel();
 
-},{"./models/State":8}],12:[function(require,module,exports){
-var _ = require('underscore');
-var Backbone = require('backbone');
-
-var src = require('../../templates/app/app.html');
-var PrincipalView = require('./Principal');
-
-
-module.exports = Backbone.View.extend({
-
-  template: _.template(src),
-
-  events: {},
-
-  initialize: function () {
-
-    this.principalView = null;
-
-    this.render();
-  },
-
-  render: function () {
-
-    var html = this.template();
-    this.$el.html(html);
-
-    var $principalEl = this.$('.principal');
-    this.principalView = new PrincipalView({
-      el: $principalEl
-    });
-  }
-
-});
-
-},{"../../templates/app/app.html":14,"./Principal":13,"backbone":1,"underscore":3}],13:[function(require,module,exports){
-var _ = require('underscore');
-var Backbone = require('backbone');
-
-var src = require('../../templates/principal/main.html');
-
-
-module.exports = Backbone.View.extend({
-
-  template: _.template(src),
-
-  events: {},
-
-  initialize: function () {
-
-    this.render();
-  },
-
-  render: function () {
-
-    var html = this.template();
-    this.$el.html(html);
-  }
-
-});
-
-},{"../../templates/principal/main.html":15,"backbone":1,"underscore":3}],14:[function(require,module,exports){
-module.exports = "<!-- HEADER -->\n<header class=\"app__header row\">\n    <div class=\"column small-12\">\n        <img src=\"/img/logo.jpg\" alt=\"ZooAPI\">\n        <h1>ZooAPI</h1>\n    </div>\n</header>\n\n<!-- CONTENT -->\n<div class=\"app__content row\">\n\n    <!-- SIDEBAR -->\n    <aside class=\"app__sidebar column small-12 medium-4\">\n        <h2>Sidebar</h2>\n        <ul>\n            <li><a href=\"#\">Principal</a></li>\n            <li><a href=\"#zoologicos\">Zoológicos</a></li>\n            <li><a href=\"#animales\">Animales</a></li>\n            <li><a href=\"#animales/crear\">Crear animal</a></li>\n            <li><a href=\"#transacciones\">Transacciones</a></li>\n        </ul>\n    </aside>\n\n    <!-- SECTIONS -->\n    <div class=\"app__sections column small-12 medium-8\">\n\n        <!-- PRINCIPAL -->\n        <section class=\"app__section principal\"></section>\n\n        <!-- ZOOLÓGICOS -->\n        <section class=\"app__section zoos\"></section>\n\n        <!-- ANIMALES -->\n        <section class=\"app__section animals\"></section>\n\n        <!-- ANIMALES - CREAR -->\n        <section class=\"app__section animals-create\"></section>\n\n        <!-- TRANSACCIONES -->\n        <section class=\"app__section transactions\"></section>\n\n    </div>\n</div>\n\n<!-- FOOTER -->\n<footer class=\"app__footer row\">\n    <div class=\"column small-12\">\n        <p>&copy; 2016 Red global de zoológicos.</p>\n    </div>\n</footer>\n";
-
-},{}],15:[function(require,module,exports){
-module.exports = "<h1>Principal</h1>\n<p>Esta es la página principal del proyecto ZooAPI.</p>\n";
-
-},{}]},{},[4]);
+},{"./models/State":15}]},{},[13]);

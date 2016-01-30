@@ -1,13 +1,8 @@
 {
   "VERSION": "1.0.0",
   "API": {
-    "PROTOCOL": "HTTP",
-    "SERVER": "zooapi.heroku.com",
-    "PORT": 80,
-    "ENDPOINTS": {
-      "ANIMAL": "animals",
-      "ZOO": "zoo",
-      "TRANSACTION": "transaction",
-    }
+    "PROTOCOL": "http",
+    "SERVER": "zooapi.herokuapp.com",
+    "PORT": 80
   }
 }

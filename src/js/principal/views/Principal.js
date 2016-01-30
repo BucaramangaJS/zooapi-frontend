@@ -1,7 +1,7 @@
 var _ = require('underscore');
 var Backbone = require('backbone');
 
-var src = require('../../templates/principal/main.html');
+var src = require('../templates/main.html');
 
 
 module.exports = Backbone.View.extend({

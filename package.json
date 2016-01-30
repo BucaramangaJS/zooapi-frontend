@@ -20,6 +20,7 @@
   "homepage": "https://github.com/BucaramangaJS/zooapi-frontend#readme",
   "devDependencies": {
     "backbone": "^1.2.3",
+    "jquery": "^2.2.0",
     "stringify": "^3.2.0",
     "underscore": "^1.8.3"
   },
