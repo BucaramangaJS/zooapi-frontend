@@ -1,0 +1,86 @@
+/**
+ * BODY
+ */
+body {
+    font-family: sans-serif;
+    font-size: 1rem;
+    line-height: 1.4;
+    margin: 0;
+    padding: 0;
+    background-color: #2980b9;
+    color: #FFF;
+}
+
+
+/**
+ * APP
+ */
+.app {}
+
+
+/**
+ * HEADER
+ */
+
+.app__header {
+    padding: 10px;
+}
+
+.app__header img {
+    float: left;
+    height: 80px;
+    margin-right: 20px;
+    border-radius: 5px;
+}
+
+.app__header h1 {
+    font-size: 2rem;
+    margin: 0;
+    line-height: 80px;
+}
+
+
+/**
+ * FOOTER
+ */
+.app__footer {
+    padding: 20px 10px;
+}
+
+
+/**
+ * CONTENT
+ */
+.app__content {
+    padding: 50px 0;
+    min-height: 500px;
+    background-color: #FFF;
+    color: #444;
+}
+
+
+/**
+ * SIDEBAR
+ */
+.app__sidebar {
+    padding: 0 20px;
+}
+
+.app__sidebar h2 {
+    margin: 0 0 20px 0;
+    font-size: 1.5rem;
+}
+
+.app__sidebar ul {
+    list-style: none;
+}
+
+.app__sidebar ul li a {
+    display: block;
+    padding: 5px;
+    background-color: #EFEFEF;
+}
+
+.app__sidebar ul li a:hover {
+    background-color: #DDD;
+}

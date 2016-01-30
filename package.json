@@ -1,0 +1,29 @@
+{
+  "name": "zooapi-frontend",
+  "version": "1.0.0",
+  "description": "Zooapi frontend.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BucaramangaJS/zooapi-frontend.git"
+  },
+  "keywords": [
+    "zoo",
+    "frontend",
+    "api"
+  ],
+  "author": "Romel Pérez (romelperez.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BucaramangaJS/zooapi-frontend/issues"
+  },
+  "homepage": "https://github.com/BucaramangaJS/zooapi-frontend#readme",
+  "devDependencies": {
+    "backbone": "^1.2.3",
+    "stringify": "^3.2.0",
+    "underscore": "^1.8.3"
+  },
+  "dependencies": {
+    "express": "^4.13.4"
+  }
+}
