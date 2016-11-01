@@ -1,5 +1,9 @@
 # ZooAPI Frontend
 
+[![bucaramangajs](https://img.shields.io/badge/bucaramangajs-project-009bd4.svg)](http://bucaramangajs.org)
+
+> **Este proyecto no fue completado y actualmente es obsoleto.**
+
 > Taller de desarrollo JavaScript para el segundo Meetup de [BucaramangaJS.org](http://bucaramangajs.org).
 
 Red global de zoológicos.
